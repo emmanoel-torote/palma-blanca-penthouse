@@ -84,7 +84,7 @@
     #hero.loaded .hero-bg { transform: scale(1); }
     #hero::before {
       content: ''; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to bottom, rgba(21,31,43,.52) 0%, rgba(21,31,43,0) 32%, rgba(21,31,43,0) 48%, rgba(21,31,43,.82) 100%);
+      background: linear-gradient(to bottom, rgba(21,31,43,.65) 0%, rgba(21,31,43,.2) 38%, rgba(21,31,43,.25) 52%, rgba(21,31,43,.88) 100%);
     }
     .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 60px 84px; }
     .hero-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
@@ -142,15 +142,28 @@
     #gallery { padding: 0 60px 96px; }
     #gallery .section-label { margin-bottom: 20px; }
 
-    /* Row 1: large left + stacked right */
-    .gal-row1 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 4px; height: 480px; }
-    .gal-right { display: grid; grid-template-rows: 1fr 1fr; gap: 4px; }
+    .gal-row1 {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      grid-template-rows: 480px;
+      gap: 4px;
+    }
+    .gal-right {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+      height: 480px;
+    }
+    .gal-row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 260px;
+      gap: 4px;
+      margin-top: 4px;
+    }
 
-    /* Row 2: three equal */
-    .gal-row2 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; height: 260px; margin-top: 4px; }
-
-    .gi { overflow: hidden; cursor: zoom-in; position: relative; }
-    .gi img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .gi { overflow: hidden; cursor: zoom-in; position: relative; height: 100%; }
+    .gi img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; display: block; }
     .gi:hover img { transform: scale(1.055); }
     .gi .glbl {
       position: absolute; bottom: 0; left: 0; right: 0;
@@ -315,8 +328,9 @@
       .trust-item { border-right: none; border-bottom: 1px solid var(--border); flex: 0 0 50%; }
       #intro { grid-template-columns: 1fr; padding: 64px 24px; gap: 48px; }
       #gallery { padding: 0 24px 64px; }
-      .gal-row1 { grid-template-columns: 1fr 1fr; height: 320px; }
-      .gal-row2 { height: 200px; }
+      .gal-row1 { grid-template-columns: 1fr 1fr; grid-template-rows: 300px; }
+      .gal-right { height: 300px; }
+      .gal-row2 { grid-template-rows: 200px; }
       #features { padding: 64px 24px; }
       .feat-grid { grid-template-columns: 1fr 1fr; }
       .feat-grid .fc:last-child { grid-column: span 2; }
@@ -369,7 +383,7 @@
 <!-- STICKY BOTTOM BAR (appears after hero) -->
 <div id="sticky-bar">
   <div class="sb-left">
-    <span class="sb-price">$499,000</span>
+    <span class="sb-price">$480,000</span>
     <span class="sb-detail">USD · Palma Blanca Penthouse #134 · 3 Bed · 3 Bath · 2,502 sq ft</span>
   </div>
   <a href="#contact" class="sb-btn">Request a Briefing</a>
@@ -389,7 +403,7 @@
       <div class="h-spec"><span class="val">3</span><span class="lbl">Bedrooms</span></div>
       <div class="h-spec"><span class="val">3</span><span class="lbl">Bathrooms</span></div>
       <div class="h-spec"><span class="val">2,502</span><span class="lbl">Sq Ft</span></div>
-      <div class="h-spec"><span class="val">$499K</span><span class="lbl">USD · Direct from Developer</span></div>
+      <div class="h-spec"><span class="val">$480K</span><span class="lbl">USD · Direct from Developer</span></div>
     </div>
   </div>
   <div class="scroll-ind">
@@ -581,7 +595,7 @@
   </div>
   <div class="map-wrap fade-up" style="transition-delay:.15s">
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.5!2d-109.9167!3d22.8903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86af4b26e3d685a1%3A0x3b8a6c4c97d2d7c3!2sPalma+Blanca%2C+Cabo+San+Lucas!5e0!3m2!1sen!2smx!4v1710000000000"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d462.8!2d-109.921995!3d22.88305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86af4b26e3d685a1%3A0x3b8a6c4c97d2d7c3!2sPalma+Blanca%2C+Cabo+San+Lucas!5e0!3m2!1sen!2smx!4v1710000000000"
       allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
       title="Palma Blanca location"
     ></iframe>
@@ -592,7 +606,7 @@
 <section id="contact">
   <div class="price-col fade-up">
     <p class="section-label">Investment Summary</p>
-    <div class="price-num">$499,000</div>
+    <div class="price-num">$480,000</div>
     <p class="price-sub">USD · Direct from Developer · No Brokerage Fees</p>
     <div class="inv-list">
       <div class="inv-row"><span class="ico">◈</span><div><strong>Penthouse level, 4-story building</strong><em>Top floor. No shared overhead. Maximum privacy.</em></div></div>
@@ -642,7 +656,7 @@
         <textarea id="message" name="message" placeholder="Tell us about your timeline, financing questions, or anything else…"></textarea>
       </div>
       <input type="hidden" name="property" value="Palma Blanca Penthouse #134" />
-      <input type="hidden" name="price" value="$499,000 USD" />
+      <input type="hidden" name="price" value="$480,000 USD" />
       <input type="hidden" name="source" value="Landing Page — META Ads" />
       <input type="hidden" name="_subject" value="New Inquiry — Palma Blanca Penthouse #134" />
       <button type="submit" class="form-btn" id="submit-btn">Request Private Briefing</button>
