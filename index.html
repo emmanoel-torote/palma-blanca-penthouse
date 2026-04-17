@@ -5,16 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Palma Blanca Penthouse #134 — Cabo San Lucas | Galta Real Estate</title>
   <meta name="description" content="Palma Blanca Penthouse #134. 3 bed · 3 bath · 2,502 sq ft. Ocean and city views in the heart of Cabo San Lucas. Direct from developer. $499,000 USD." />
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ============================================================
-       CSS VARIABLES — GALTA BRAND
-    ============================================================ */
     :root {
       --navy:      #1d2b3a;
       --navy-deep: #151f2b;
@@ -23,1576 +18,746 @@
       --body-bg:   #f5f4f0;
       --border:    #dcd9d2;
       --white:     #ffffff;
-      --text-muted: #8a8880;
+      --muted:     #8a8880;
       --green-wa:  #25d366;
-
-      --font-serif: 'Cormorant Garamond', Georgia, serif;
-      --font-sans:  'Jost', sans-serif;
-
-      --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      --radius: 2px;
+      --serif:     'Cormorant Garamond', Georgia, serif;
+      --sans:      'Jost', sans-serif;
+      --ease:      0.35s cubic-bezier(0.4,0,0.2,1);
     }
 
-    /* ============================================================
-       RESET & BASE
-    ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-sans);
-      background: var(--body-bg);
-      color: var(--navy);
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
+    body { font-family: var(--sans); background: var(--body-bg); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
     img { display: block; max-width: 100%; }
     a { text-decoration: none; color: inherit; }
 
-    /* ============================================================
-       UTILITY CLASSES
-    ============================================================ */
-    .eyebrow {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--sky);
-    }
+    .section-label { font-size: 9px; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .fade-up { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    .section-label {
-      font-family: var(--font-sans);
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .fade-up {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ============================================================
-       TOPBAR
-    ============================================================ */
+    /* ── TOPBAR ─────────────────────────────────────────────── */
     #topbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 68px;
-      background: rgba(21, 31, 43, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      transition: background var(--transition);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 68px;
+      background: rgba(21,31,43,0.94); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
+    #topbar .logo img { height: 32px; }
+    #topbar .nav-cta {
+      font-family: var(--sans); font-size: 10px; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--white); border: 1px solid rgba(255,255,255,0.4);
+      padding: 10px 22px; background: transparent; cursor: pointer;
+      transition: background var(--ease), border-color var(--ease);
+    }
+    #topbar .nav-cta:hover { background: rgba(255,255,255,0.09); border-color: var(--white); }
 
-    #topbar .logo img {
-      height: 34px;
-      width: auto;
+    /* ── STICKY BOTTOM BAR ──────────────────────────────────── */
+    #sticky-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+      background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 48px;
+      display: none; align-items: center; justify-content: space-between; gap: 20px;
     }
+    #sticky-bar.on { display: flex; }
+    #sticky-bar .sb-left { display: flex; align-items: baseline; gap: 12px; }
+    #sticky-bar .sb-price { font-family: var(--serif); font-size: 24px; font-weight: 300; color: var(--white); }
+    #sticky-bar .sb-detail { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.38); }
+    #sticky-bar a.sb-btn {
+      flex-shrink: 0; background: var(--sky); color: var(--white);
+      font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 13px 28px; transition: background var(--ease);
+    }
+    #sticky-bar a.sb-btn:hover { background: #5a7d95; }
 
-    #topbar .cta-btn {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--white);
-      border: 1px solid rgba(255,255,255,0.5);
-      padding: 10px 22px;
-      background: transparent;
-      cursor: pointer;
-      transition: background var(--transition), border-color var(--transition);
-    }
-    #topbar .cta-btn:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: var(--white);
-    }
-
-    /* ============================================================
-       HERO
-    ============================================================ */
+    /* ── HERO ───────────────────────────────────────────────── */
     #hero {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      min-height: 600px;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
+      position: relative; width: 100%; height: 100vh; min-height: 640px;
+      overflow: hidden; display: flex; align-items: flex-end;
     }
-
-    #hero .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://www.remaxcaborealestate.com/storage/mlsphotos/7523/20260101154032446426000000_1280.jpg');
-      background-size: cover;
-      background-position: center;
-      transform: scale(1.03);
-      transition: transform 6s ease;
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('images/hero.jpg') center 35% / cover no-repeat;
+      transform: scale(1.04); transition: transform 7s ease;
     }
     #hero.loaded .hero-bg { transform: scale(1); }
-
-    /* Gradient overlays */
     #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(21,31,43,0.55) 0%,
-        rgba(21,31,43,0) 35%,
-        rgba(21,31,43,0) 50%,
-        rgba(21,31,43,0.75) 100%
-      );
-      z-index: 1;
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom, rgba(21,31,43,.52) 0%, rgba(21,31,43,0) 32%, rgba(21,31,43,0) 48%, rgba(21,31,43,.82) 100%);
     }
+    .hero-content { position: relative; z-index: 2; width: 100%; padding: 0 60px 84px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .hero-eyebrow span { font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+    .hero-eyebrow .sep { width: 28px; height: 1px; background: var(--sky); }
+    .hero-eyebrow .built { color: var(--sky); }
+    #hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(46px,6vw,86px); line-height: 1.04; color: var(--white); margin-bottom: 36px; }
+    #hero h1 em { font-style: italic; }
+    .hero-specs { display: inline-flex; border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(10px); background: rgba(21,31,43,.5); }
+    .h-spec { padding: 18px 28px; border-right: 1px solid rgba(255,255,255,.11); }
+    .h-spec:last-child { border-right: none; }
+    .h-spec .val { font-family: var(--serif); font-size: 26px; color: var(--white); display: block; line-height: 1.1; }
+    .h-spec .lbl { font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,.42); margin-top: 4px; display: block; }
+    .scroll-ind { position: absolute; bottom: 32px; right: 48px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .scroll-ind span { font-size: 8px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,.32); writing-mode: vertical-lr; }
+    .scroll-ind .line { width: 1px; height: 48px; background: linear-gradient(to bottom, rgba(255,255,255,.5), transparent); animation: sl 2s ease-in-out infinite; }
+    @keyframes sl { 0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom} }
 
-    #hero .hero-content {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      padding: 0 60px 70px;
+    /* ── TRUST BAR ──────────────────────────────────────────── */
+    #trust-bar {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; flex-wrap: wrap;
     }
+    .trust-item {
+      display: flex; align-items: center; gap: 9px;
+      padding: 16px 28px; border-right: 1px solid var(--border);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item .ti { font-size: 13px; color: var(--sky); }
+    .trust-item span { font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy); }
 
-    #hero .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 16px;
+    /* ── INTRO ──────────────────────────────────────────────── */
+    #intro { padding: 96px 60px; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 80px; align-items: start; }
+    #intro h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(32px,3.5vw,52px); line-height: 1.12; color: var(--navy); margin-bottom: 22px; }
+    #intro h2 em { font-style: italic; color: var(--sky); }
+    #intro p { font-size: 15px; line-height: 1.82; color: #4a5568; margin-bottom: 14px; max-width: 480px; }
+    .intro-cta {
+      display: inline-flex; align-items: center; gap: 12px;
+      margin-top: 28px; padding: 15px 28px;
+      background: var(--navy); color: var(--white);
+      font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      transition: background var(--ease);
     }
-    #hero .hero-eyebrow span {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-    }
-    #hero .hero-eyebrow .sep {
-      width: 32px;
-      height: 1px;
-      background: var(--sky);
-    }
-    #hero .hero-eyebrow .built-tag {
-      color: var(--sky);
-    }
+    .intro-cta:hover { background: var(--sky); }
+    .intro-cta .arr { font-size: 16px; transition: transform var(--ease); }
+    .intro-cta:hover .arr { transform: translateX(4px); }
 
-    #hero h1 {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: clamp(44px, 6vw, 82px);
-      line-height: 1.05;
-      color: var(--white);
-      margin-bottom: 36px;
-      max-width: 700px;
-    }
-    #hero h1 em {
-      font-style: italic;
-    }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .stat-cell { background: var(--white); padding: 34px 28px; }
+    .stat-cell .num { font-family: var(--serif); font-size: 44px; font-weight: 300; color: var(--navy); line-height: 1; display: block; }
+    .stat-cell .slbl { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 8px; display: block; }
 
-    /* Hero specs bar */
-    .hero-specs {
-      display: flex;
-      align-items: stretch;
-      gap: 0;
-      border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(8px);
-      background: rgba(21,31,43,0.45);
-      max-width: 680px;
-    }
-    .hero-spec {
-      flex: 1;
-      padding: 16px 22px;
-      border-right: 1px solid rgba(255,255,255,0.15);
-    }
-    .hero-spec:last-child { border-right: none; }
-    .hero-spec .val {
-      font-family: var(--font-serif);
-      font-size: 24px;
-      font-weight: 400;
-      color: var(--white);
-      display: block;
-      line-height: 1.1;
-    }
-    .hero-spec .lbl {
-      font-family: var(--font-sans);
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-top: 3px;
-      display: block;
-    }
+    /* ── GALLERY ────────────────────────────────────────────── */
+    #gallery { padding: 0 60px 96px; }
+    #gallery .section-label { margin-bottom: 20px; }
 
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 28px;
-      right: 40px;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    .scroll-indicator span {
-      font-family: var(--font-sans);
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      writing-mode: vertical-lr;
-    }
-    .scroll-indicator .line {
-      width: 1px;
-      height: 48px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
-      animation: scrollLine 1.8s ease-in-out infinite;
-    }
-    @keyframes scrollLine {
-      0% { transform: scaleY(0); transform-origin: top; }
-      50% { transform: scaleY(1); transform-origin: top; }
-      51% { transform: scaleY(1); transform-origin: bottom; }
-      100% { transform: scaleY(0); transform-origin: bottom; }
-    }
+    /* Row 1: large left + stacked right */
+    .gal-row1 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 4px; height: 480px; }
+    .gal-right { display: grid; grid-template-rows: 1fr 1fr; gap: 4px; }
 
-    /* ============================================================
-       INTRO SECTION
-    ============================================================ */
-    #intro {
-      padding: 100px 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
+    /* Row 2: three equal */
+    .gal-row2 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; height: 260px; margin-top: 4px; }
 
-    #intro .intro-copy h2 {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: clamp(32px, 3.5vw, 50px);
-      line-height: 1.15;
-      color: var(--navy);
-      margin-bottom: 24px;
+    .gi { overflow: hidden; cursor: zoom-in; position: relative; }
+    .gi img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .gi:hover img { transform: scale(1.055); }
+    .gi .glbl {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 10px 14px;
+      background: linear-gradient(transparent, rgba(21,31,43,.65));
+      font-size: 9px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,.85); opacity: 0; transition: opacity var(--ease);
     }
-    #intro .intro-copy h2 em { font-style: italic; color: var(--sky); }
+    .gi:hover .glbl { opacity: 1; }
 
-    #intro .intro-copy p {
-      font-size: 15px;
-      line-height: 1.75;
-      color: #4a5568;
-      max-width: 460px;
-    }
+    /* Hidden images for lightbox only */
+    .gal-hidden { display: none; }
 
-    #intro .intro-copy .tag-line {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 32px;
-      padding: 12px 20px;
-      border: 1px solid var(--border);
-      background: var(--white);
+    .gal-footer {
+      display: flex; align-items: center; justify-content: flex-end;
+      gap: 8px; padding: 10px 0; cursor: pointer; margin-top: 4px;
     }
-    #intro .intro-copy .tag-line span {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--navy);
-    }
-    #intro .intro-copy .tag-line .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--sky);
-    }
+    .gal-footer span { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sky); border-bottom: 1px solid transparent; transition: border-color var(--ease); }
+    .gal-footer:hover span { border-color: var(--sky); }
 
-    .stat-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .stat-cell {
-      background: var(--white);
-      padding: 32px 28px;
-    }
-    .stat-cell .num {
-      font-family: var(--font-serif);
-      font-size: 42px;
-      font-weight: 300;
-      color: var(--navy);
-      line-height: 1;
-      display: block;
-    }
-    .stat-cell .stat-lbl {
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-top: 8px;
-      display: block;
-    }
-
-    /* ============================================================
-       GALLERY
-    ============================================================ */
-    #gallery {
-      padding: 0 60px 100px;
-    }
-    #gallery .section-label { margin-bottom: 24px; }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      grid-template-rows: 300px 280px;
-      gap: 4px;
-    }
-    .gallery-item {
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .gallery-item:first-child {
-      grid-row: span 2;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-    .gallery-item:hover img {
-      transform: scale(1.06);
-    }
-
-    /* ============================================================
-       FEATURES
-    ============================================================ */
-    #features {
-      background: var(--navy);
-      padding: 100px 60px;
-    }
+    /* ── FEATURES ───────────────────────────────────────────── */
+    #features { background: var(--navy); padding: 96px 60px; }
     #features .section-label { color: var(--sky); margin-bottom: 48px; }
+    .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,.07); }
+    .fc { background: var(--navy-mid); padding: 40px 36px; transition: background var(--ease); }
+    .fc:hover { background: var(--navy-deep); }
+    .fc.star { background: var(--navy-deep); border: 1px solid rgba(107,143,168,.38); position: relative; }
+    .fc.star::after { content: 'Developer Direct'; position: absolute; top: 16px; right: 20px; font-size: 8px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sky); }
+    .fc-icon { font-size: 18px; color: var(--sky); margin-bottom: 18px; }
+    .fc h3 { font-family: var(--serif); font-weight: 400; font-size: 20px; color: var(--white); margin-bottom: 10px; line-height: 1.25; }
+    .fc p { font-size: 13px; line-height: 1.72; color: rgba(255,255,255,.46); }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: rgba(255,255,255,0.08);
-    }
-    .feature-card {
-      background: var(--navy-mid);
-      padding: 40px 36px;
-      border: 1px solid rgba(255,255,255,0.06);
-      transition: background var(--transition);
-    }
-    .feature-card:hover { background: var(--navy-deep); }
+    /* ── PROGRESS ───────────────────────────────────────────── */
+    #progress { padding: 96px 60px; }
+    .prog-head { display: grid; grid-template-columns: 1fr auto; align-items: end; margin-bottom: 40px; }
+    .prog-head h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(28px,3vw,44px); color: var(--navy); }
+    .prog-pct { font-family: var(--serif); font-size: 64px; font-weight: 300; color: var(--navy); line-height: 1; }
+    .prog-pct small { font-size: 10px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); display: block; text-align: right; margin-top: 4px; }
+    .prog-track { height: 3px; background: var(--border); margin-bottom: 52px; }
+    .prog-fill { height: 100%; background: var(--sky); width: 0%; transition: width 1.6s cubic-bezier(.4,0,.2,1); }
+    .milestones { display: grid; grid-template-columns: repeat(5,1fr); border: 1px solid var(--border); background: var(--border); gap: 1px; }
+    .ms { background: var(--white); padding: 26px 22px; }
+    .ms-dot { width: 8px; height: 8px; border-radius: 50%; margin-bottom: 16px; }
+    .ms.done .ms-dot { background: var(--sky); }
+    .ms.now .ms-dot { background: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,.2); }
+    .ms.soon .ms-dot { background: var(--border); }
+    .ms h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); margin-bottom: 6px; }
+    .ms.now h4 { color: #16a34a; }
+    .ms p { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
-    .feature-card.featured {
-      background: var(--navy-deep);
-      border-color: var(--sky);
-      border-width: 1px;
-      position: relative;
-    }
-    .feature-card.featured::before {
-      content: 'Developer Direct';
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--sky);
-    }
+    /* ── AMENITIES ──────────────────────────────────────────── */
+    #amenities { background: var(--white); padding: 96px 60px; }
+    #amenities .section-label { margin-bottom: 44px; }
+    .am-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .am { background: var(--white); padding: 40px 28px; text-align: center; transition: background var(--ease); }
+    .am:hover { background: var(--body-bg); }
+    .am-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+    .am h4 { font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--navy); }
 
-    .feature-icon {
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: var(--sky);
-    }
-
-    .feature-card h3 {
-      font-family: var(--font-serif);
-      font-weight: 400;
-      font-size: 20px;
-      color: var(--white);
-      margin-bottom: 10px;
-    }
-    .feature-card p {
-      font-size: 13px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.5);
-    }
-
-    /* ============================================================
-       CONSTRUCTION PROGRESS
-    ============================================================ */
-    #progress {
-      padding: 100px 60px;
-      background: var(--body-bg);
-    }
-
-    .progress-header {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: end;
-      margin-bottom: 48px;
-      gap: 20px;
-    }
-    .progress-header h2 {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: clamp(28px, 3vw, 42px);
-      color: var(--navy);
-    }
-    .progress-pct {
-      font-family: var(--font-serif);
-      font-size: 60px;
-      font-weight: 300;
-      color: var(--navy);
-      line-height: 1;
-    }
-    .progress-pct small {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      display: block;
-      text-align: right;
-    }
-
-    .progress-bar-wrap {
-      height: 4px;
-      background: var(--border);
-      margin-bottom: 60px;
-      position: relative;
-    }
-    .progress-bar-fill {
-      height: 100%;
-      background: var(--sky);
-      width: 0%;
-      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .milestones {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 0;
-      border: 1px solid var(--border);
-      background: var(--border);
-    }
-    .milestone {
-      background: var(--white);
-      padding: 28px 24px;
-      position: relative;
-    }
-    .milestone-status {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      margin-bottom: 16px;
-    }
-    .milestone.done .milestone-status { background: var(--sky); }
-    .milestone.active .milestone-status { background: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.2); }
-    .milestone.pending .milestone-status { background: var(--border); }
-
-    .milestone h4 {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 6px;
-    }
-    .milestone p {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    .milestone.active h4 { color: #f59e0b; }
-
-    /* ============================================================
-       AMENITIES
-    ============================================================ */
-    #amenities {
-      background: var(--white);
-      padding: 100px 60px;
-    }
-    #amenities .section-label { margin-bottom: 48px; }
-
-    .amenities-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .amenity-item {
-      background: var(--white);
-      padding: 40px 28px;
-      text-align: center;
-      transition: background var(--transition);
-    }
-    .amenity-item:hover { background: var(--body-bg); }
-    .amenity-icon {
-      font-size: 28px;
-      margin-bottom: 14px;
-      display: block;
-    }
-    .amenity-item h4 {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--navy);
-    }
-
-    /* ============================================================
-       LOCATION
-    ============================================================ */
-    #location {
-      padding: 100px 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    #location h2 {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: clamp(28px, 3vw, 44px);
-      line-height: 1.2;
-      color: var(--navy);
-      margin-bottom: 24px;
-    }
+    /* ── LOCATION ───────────────────────────────────────────── */
+    #location { padding: 96px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    #location h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(28px,3vw,44px); line-height: 1.2; color: var(--navy); margin-bottom: 18px; }
     #location h2 em { font-style: italic; color: var(--sky); }
+    #location .loc-p { font-size: 14px; line-height: 1.82; color: #4a5568; margin-bottom: 28px; }
+    .dists { display: flex; flex-direction: column; border: 1px solid var(--border); }
+    .dr { display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border-bottom: 1px solid var(--border); background: var(--white); }
+    .dr:last-child { border-bottom: none; }
+    .dr .pl { font-size: 13px; font-weight: 500; color: var(--navy); }
+    .dr .dt { font-family: var(--serif); font-size: 16px; color: var(--sky); }
+    .map-wrap { height: 480px; overflow: hidden; border: 1px solid var(--border); }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; }
 
-    #location .loc-intro {
-      font-size: 14px;
-      line-height: 1.8;
-      color: #4a5568;
-      margin-bottom: 36px;
-    }
-
-    .distances {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border);
-    }
-    .distance-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      background: var(--white);
-    }
-    .distance-row:last-child { border-bottom: none; }
-    .distance-row .place {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--navy);
-    }
-    .distance-row .dist {
-      font-family: var(--font-serif);
-      font-size: 16px;
-      color: var(--sky);
-    }
-
-    #location .map-wrap {
-      height: 480px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-    #location .map-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* ============================================================
-       PRICE + FORM
-    ============================================================ */
-    #contact {
-      background: var(--navy-deep);
-      padding: 100px 60px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
+    /* ── CONTACT / FORM ─────────────────────────────────────── */
+    #contact { background: var(--navy-deep); padding: 100px 60px; display: grid; grid-template-columns: 1fr 1.1fr; gap: 80px; align-items: start; }
     .price-col .section-label { color: var(--sky); }
+    .price-num { font-family: var(--serif); font-size: clamp(46px,5vw,76px); font-weight: 300; color: var(--white); line-height: 1; margin: 14px 0 6px; }
+    .price-sub { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,.32); margin-bottom: 44px; }
+    .inv-list { display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,.08); }
+    .inv-row { display: flex; align-items: flex-start; gap: 14px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+    .inv-row .ico { color: var(--sky); font-size: 13px; margin-top: 3px; flex-shrink: 0; }
+    .inv-row strong { font-size: 13px; font-weight: 500; color: var(--white); display: block; margin-bottom: 3px; }
+    .inv-row em { font-style: normal; font-size: 12px; color: rgba(255,255,255,.36); }
 
-    .price-display {
-      font-family: var(--font-serif);
-      font-size: clamp(44px, 5vw, 72px);
-      font-weight: 300;
-      color: var(--white);
-      line-height: 1;
-      margin: 16px 0;
+    /* Form card */
+    .form-card { background: var(--white); padding: 52px 48px; }
+    .form-nudge { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; background: rgba(107,143,168,.1); border-left: 3px solid var(--sky); margin-bottom: 28px; }
+    .form-nudge p { font-size: 12px; font-weight: 500; color: var(--navy); line-height: 1.55; }
+    .form-head { font-family: var(--serif); font-size: 28px; font-weight: 400; color: var(--navy); margin-bottom: 6px; line-height: 1.2; }
+    .form-sub { font-size: 13px; color: var(--muted); margin-bottom: 26px; line-height: 1.65; }
+    .fg { margin-bottom: 14px; }
+    .fg label { display: block; font-size: 9px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .fg input, .fg textarea {
+      width: 100%; padding: 13px 16px;
+      border: 1px solid var(--border); background: var(--body-bg);
+      font-family: var(--sans); font-size: 14px; color: var(--navy);
+      outline: none; border-radius: 0; -webkit-appearance: none;
+      transition: border-color var(--ease), background var(--ease);
     }
-    .price-note {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      margin-bottom: 48px;
+    .fg input:focus, .fg textarea:focus { border-color: var(--sky); background: var(--white); }
+    .fg textarea { resize: vertical; min-height: 88px; }
+    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-btn {
+      width: 100%; padding: 17px; background: var(--navy); color: var(--white);
+      border: none; font-family: var(--sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; margin-top: 6px;
+      transition: background var(--ease);
     }
-
-    .invest-highlights {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-    .invest-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 20px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .invest-row .icon { color: var(--sky); font-size: 16px; margin-top: 2px; }
-    .invest-row div p {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--white);
-      margin-bottom: 3px;
-    }
-    .invest-row div span {
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    /* FORM */
-    .form-col {
-      background: var(--white);
-      padding: 48px 44px;
-    }
-    .form-col .form-headline {
-      font-family: var(--font-serif);
-      font-weight: 400;
-      font-size: 26px;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-    .form-col .form-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      line-height: 1.6;
+    .form-btn:hover { background: var(--sky); }
+    .form-btn:disabled { opacity: .6; cursor: not-allowed; }
+    .form-priv { font-size: 11px; color: var(--muted); text-align: center; margin-top: 10px; }
+    #form-success { display: none; text-align: center; padding: 48px 0; }
+    #form-success .fs-h { font-family: var(--serif); font-size: 26px; color: var(--navy); margin-bottom: 12px; }
+    #form-success .fs-p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    #form-success .fs-wa {
+      display: inline-block; margin-top: 24px; padding: 13px 28px;
+      background: var(--green-wa); color: var(--white);
+      font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
     }
 
-    .form-group {
-      margin-bottom: 16px;
-    }
-    .form-group label {
-      display: block;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 13px 16px;
-      border: 1px solid var(--border);
-      background: var(--body-bg);
-      font-family: var(--font-sans);
-      font-size: 14px;
-      color: var(--navy);
-      outline: none;
-      transition: border-color var(--transition);
-      border-radius: 0;
-      -webkit-appearance: none;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--sky);
-      background: var(--white);
-    }
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .form-submit {
-      width: 100%;
-      padding: 16px;
-      background: var(--navy);
-      color: var(--white);
-      border: none;
-      font-family: var(--font-sans);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      cursor: pointer;
-      margin-top: 8px;
-      transition: background var(--transition);
-    }
-    .form-submit:hover { background: var(--navy-mid); }
-
-    .form-privacy {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
-      margin-top: 12px;
-    }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
+    /* ── FOOTER ─────────────────────────────────────────────── */
     #footer {
-      background: var(--navy-deep);
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 48px 60px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 40px;
+      background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,.06);
+      padding: 44px 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 40px;
     }
+    #footer .fl img { height: 28px; opacity: .62; }
+    #footer .fc2 { text-align: center; }
+    #footer .fc2 a { display: block; font-size: 12px; color: rgba(255,255,255,.38); margin-bottom: 4px; transition: color var(--ease); }
+    #footer .fc2 a:hover { color: var(--white); }
+    #footer .flg { text-align: right; font-size: 11px; color: rgba(255,255,255,.2); line-height: 1.6; }
 
-    #footer .footer-logo img {
-      height: 30px;
-      width: auto;
-      opacity: 0.7;
-    }
-
-    #footer .footer-contact {
-      text-align: center;
-    }
-    #footer .footer-contact a {
-      display: block;
-      font-size: 12px;
-      color: rgba(255,255,255,0.5);
-      margin-bottom: 4px;
-      transition: color var(--transition);
-    }
-    #footer .footer-contact a:hover { color: var(--white); }
-
-    #footer .footer-legal {
-      text-align: right;
-      font-size: 11px;
-      color: rgba(255,255,255,0.25);
-    }
-
-    /* ============================================================
-       WHATSAPP FLOAT
-    ============================================================ */
+    /* ── WHATSAPP ───────────────────────────────────────────── */
     #wa-float {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 200;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: var(--green-wa);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-      cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition);
+      position: fixed; bottom: 84px; right: 28px; z-index: 200;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--green-wa); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.38);
+      transition: transform var(--ease), box-shadow var(--ease);
     }
-    #wa-float:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 28px rgba(37,211,102,0.5);
-    }
-    #wa-float svg {
-      width: 28px;
-      height: 28px;
-      fill: white;
-    }
+    #wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.5); }
+    #wa-float svg { width: 26px; height: 26px; fill: white; }
 
-    /* ============================================================
-       LIGHTBOX
-    ============================================================ */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 300;
-      background: rgba(15,22,30,0.95);
-      align-items: center;
-      justify-content: center;
-    }
-    #lightbox.open { display: flex; }
-    #lightbox img {
-      max-width: 90vw;
-      max-height: 85vh;
-      object-fit: contain;
-    }
-    #lightbox .lb-close {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.3);
-      color: white;
-      font-size: 20px;
-      line-height: 1;
-    }
-    #lightbox .lb-prev,
-    #lightbox .lb-next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: white;
-      font-size: 22px;
-      background: rgba(255,255,255,0.05);
-      transition: background var(--transition);
-    }
-    #lightbox .lb-prev:hover,
-    #lightbox .lb-next:hover { background: rgba(255,255,255,0.12); }
-    #lightbox .lb-prev { left: 24px; }
-    #lightbox .lb-next { right: 80px; }
+    /* ── LIGHTBOX ───────────────────────────────────────────── */
+    #lb { display: none; position: fixed; inset: 0; z-index: 300; background: rgba(12,19,26,.96); align-items: center; justify-content: center; }
+    #lb.on { display: flex; }
+    #lb img { max-width: 90vw; max-height: 85vh; object-fit: contain; }
+    .lb-x { position: absolute; top: 22px; right: 22px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,.22); color: white; font-size: 20px; }
+    .lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(255,255,255,.18); color: white; font-size: 26px; background: rgba(255,255,255,.05); user-select: none; transition: background var(--ease); }
+    .lb-btn:hover { background: rgba(255,255,255,.12); }
+    #lb-p { left: 22px; }
+    #lb-n { right: 22px; }
+    #lb-c { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; color: rgba(255,255,255,.38); }
 
-    /* ============================================================
-       RESPONSIVE — 900px
-    ============================================================ */
+    /* ── RESPONSIVE 900px ───────────────────────────────────── */
     @media (max-width: 900px) {
       #topbar { padding: 0 24px; }
-
-      #hero .hero-content { padding: 0 24px 60px; }
-
-      #hero h1 { font-size: clamp(34px, 6vw, 56px); }
-
-      .hero-specs {
-        flex-wrap: wrap;
-        max-width: 100%;
-      }
-      .hero-spec {
-        flex: 0 0 50%;
-        border-bottom: 1px solid rgba(255,255,255,0.12);
-      }
-      .hero-spec:nth-child(even) { border-right: none; }
-      .hero-spec:nth-last-child(-n+2) { border-bottom: none; }
-
-      #intro {
-        grid-template-columns: 1fr;
-        padding: 64px 24px;
-        gap: 48px;
-      }
-
-      #gallery {
-        padding: 0 24px 64px;
-      }
-      .gallery-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 240px 200px 200px;
-      }
-      .gallery-item:first-child {
-        grid-column: span 2;
-        grid-row: span 1;
-      }
-
-      #features {
-        padding: 64px 24px;
-      }
-      .features-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .features-grid .feature-card:last-child {
-        grid-column: span 2;
-      }
-
+      .hero-content { padding: 0 24px 64px !important; }
+      .hero-specs { flex-wrap: wrap; width: 100%; }
+      .h-spec { flex: 0 0 50%; border-bottom: 1px solid rgba(255,255,255,.11); }
+      .h-spec:nth-child(even) { border-right: none; }
+      .h-spec:nth-last-child(-n+2) { border-bottom: none; }
+      #trust-bar { flex-wrap: wrap; justify-content: flex-start; }
+      .trust-item { border-right: none; border-bottom: 1px solid var(--border); flex: 0 0 50%; }
+      #intro { grid-template-columns: 1fr; padding: 64px 24px; gap: 48px; }
+      #gallery { padding: 0 24px 64px; }
+      .gal-row1 { grid-template-columns: 1fr 1fr; height: 320px; }
+      .gal-row2 { height: 200px; }
+      #features { padding: 64px 24px; }
+      .feat-grid { grid-template-columns: 1fr 1fr; }
+      .feat-grid .fc:last-child { grid-column: span 2; }
       #progress { padding: 64px 24px; }
-      .milestones {
-        grid-template-columns: 1fr 1fr;
-      }
-
+      .milestones { grid-template-columns: 1fr 1fr; }
       #amenities { padding: 64px 24px; }
-      .amenities-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      #location {
-        grid-template-columns: 1fr;
-        padding: 64px 24px;
-        gap: 40px;
-      }
-      #location .map-wrap { height: 320px; }
-
-      #contact {
-        grid-template-columns: 1fr;
-        padding: 64px 24px;
-        gap: 48px;
-      }
-
-      #footer {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 40px 24px;
-        gap: 24px;
-      }
-      #footer .footer-logo { text-align: center; }
-      #footer .footer-logo img { margin: 0 auto; }
-      #footer .footer-legal { text-align: center; }
+      .am-grid { grid-template-columns: 1fr 1fr; }
+      #location { grid-template-columns: 1fr; padding: 64px 24px; gap: 40px; }
+      .map-wrap { height: 320px; }
+      #contact { grid-template-columns: 1fr; padding: 64px 24px; gap: 48px; }
+      .form-card { padding: 36px 28px; }
+      #footer { grid-template-columns: 1fr; text-align: center; padding: 36px 24px; gap: 20px; }
+      #footer .fl, #footer .flg { text-align: center; }
+      #footer .fl img { margin: 0 auto; }
+      #sticky-bar { padding: 14px 24px; }
+      #sticky-bar .sb-detail { display: none; }
     }
 
-    /* ============================================================
-       RESPONSIVE — 600px
-    ============================================================ */
     @media (max-width: 600px) {
-      #hero .hero-content { padding: 0 20px 48px; }
-      #hero h1 { font-size: 36px; }
-
-      .hero-specs {
-        flex-direction: column;
-      }
-      .hero-spec {
-        flex: 0 0 100%;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.12);
-      }
-      .hero-spec:last-child { border-bottom: none; }
-
-      #intro,
-      #gallery,
-      #features,
-      #progress,
-      #amenities,
-      #location,
-      #contact {
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-      }
-      .gallery-item,
-      .gallery-item:first-child {
-        grid-column: span 1;
-        grid-row: span 1;
-        height: 220px;
-      }
-
-      .features-grid { grid-template-columns: 1fr; }
-      .features-grid .feature-card:last-child { grid-column: span 1; }
-
+      #hero h1 { font-size: 38px; }
+      .hero-specs { flex-direction: column; }
+      .h-spec { flex: 0 0 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,.11); }
+      .h-spec:last-child { border-bottom: none; }
+      .gal-row1 { grid-template-columns: 1fr; height: auto; }
+      .gal-row1 > .gi:first-child { height: 280px; }
+      .gal-right { grid-template-rows: none; grid-template-columns: 1fr 1fr; height: 200px; }
+      .gal-row2 { grid-template-columns: 1fr; height: auto; }
+      .gal-row2 .gi { height: 200px; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .feat-grid .fc:last-child { grid-column: span 1; }
       .milestones { grid-template-columns: 1fr; }
-
-      .amenities-grid { grid-template-columns: 1fr 1fr; }
-
-      .form-row { grid-template-columns: 1fr; }
-
-      .form-col { padding: 32px 24px; }
-
-      #footer { padding: 32px 20px; }
+      .am-grid { grid-template-columns: 1fr 1fr; }
+      .fg-row { grid-template-columns: 1fr; }
+      .form-card { padding: 28px 20px; }
+      #footer { padding: 28px 20px; }
+      .prog-head { grid-template-columns: 1fr; gap: 8px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============================================================
-       TOPBAR
-  ============================================================ -->
-  <header id="topbar">
-    <a href="#" class="logo">
-      <!-- Primary: Squarespace CDN logo -->
-      <img
-        src="https://images.squarespace-cdn.com/content/v1/62b34fbe5e27264c1df7b23e/1b24a9d8-fd62-4e5b-9266-5af73b17f4e5/Galta-RealEstate-Logo-Horizontal-White.png"
-        alt="Galta Real Estate"
-        onerror="this.src='images/logo-light.png'"
-      />
-    </a>
-    <a href="#contact" class="cta-btn">Request a Private Briefing</a>
-  </header>
-
-  <!-- ============================================================
-       HERO
-  ============================================================ -->
-  <section id="hero">
-    <div class="hero-bg"></div>
-
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span>Cabo San Lucas, Mexico</span>
-        <div class="sep"></div>
-        <span class="built-tag">Built by Galta</span>
-      </div>
-
-      <h1>Palma Blanca<br /><em>Penthouse #134</em></h1>
-
-      <div class="hero-specs">
-        <div class="hero-spec">
-          <span class="val">3</span>
-          <span class="lbl">Bedrooms</span>
-        </div>
-        <div class="hero-spec">
-          <span class="val">3</span>
-          <span class="lbl">Bathrooms</span>
-        </div>
-        <div class="hero-spec">
-          <span class="val">2,502</span>
-          <span class="lbl">Sq Ft</span>
-        </div>
-        <div class="hero-spec">
-          <span class="val">$499K</span>
-          <span class="lbl">USD · Direct from Developer</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="scroll-indicator">
-      <div class="line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       INTRO
-  ============================================================ -->
-  <section id="intro">
-    <div class="intro-copy fade-up">
-      <p class="section-label">The Opportunity</p>
-      <h2>Not a listing.<br /><em>Our own build.</em></h2>
-      <p>
-        Palma Blanca is a boutique, low-density condominium development in the heart of Cabo San Lucas — next to Pedregal, steps from downtown, with panoramic views of the Bay. We don't broker other people's inventory. We build, sell, and stand behind every unit ourselves.
-      </p>
-      <p style="margin-top: 16px;">
-        Penthouse #134 is one of only two 3-bedroom units in a 15-unit community. Finished, delivered, and available now — with zero construction risk.
-      </p>
-      <div class="tag-line">
-        <div class="dot"></div>
-        <span>Direct from Developer — Zero Brokerage Fees</span>
-      </div>
-    </div>
-
-    <div class="stat-grid fade-up" style="transition-delay:0.15s">
-      <div class="stat-cell">
-        <span class="num">100%</span>
-        <span class="stat-lbl">Construction Complete</span>
-      </div>
-      <div class="stat-cell">
-        <span class="num">Now</span>
-        <span class="stat-lbl">Ready for Delivery</span>
-      </div>
-      <div class="stat-cell">
-        <span class="num">15</span>
-        <span class="stat-lbl">Total Units in Enclave</span>
-      </div>
-      <div class="stat-cell">
-        <span class="num">2</span>
-        <span class="stat-lbl">Penthouse Units Available</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       GALLERY
-  ============================================================ -->
-  <section id="gallery">
-    <p class="section-label fade-up">Gallery</p>
-    <div class="gallery-grid fade-up" style="transition-delay:0.1s">
-      <div class="gallery-item" data-index="0">
-        <img src="https://www.remaxcaborealestate.com/storage/mlsphotos/7523/20260101154032567482000000_1280.jpg" alt="Palma Blanca Penthouse interior" loading="lazy" />
-      </div>
-      <div class="gallery-item" data-index="1">
-        <img src="https://www.remaxcaborealestate.com/storage/mlsphotos/7523/20260101154032671738000000_1280.jpg" alt="Palma Blanca living area" loading="lazy" />
-      </div>
-      <div class="gallery-item" data-index="2">
-        <img src="https://www.remaxcaborealestate.com/storage/mlsphotos/7523/20260101154032761558000000_1280.jpg" alt="Palma Blanca kitchen" loading="lazy" />
-      </div>
-      <div class="gallery-item" data-index="3">
-        <img src="https://www.remaxcaborealestate.com/storage/mlsphotos/7523/20260101154032843027000000_1280.jpg" alt="Palma Blanca master bedroom" loading="lazy" />
-      </div>
-      <div class="gallery-item" data-index="4">
-        <img src="https://www.remaxcaborealestate.com/storage/mlsphotos/7523/20260101154032929140000000_1280.jpg" alt="Palma Blanca view" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FEATURES
-  ============================================================ -->
-  <section id="features">
-    <p class="section-label fade-up">Property Features</p>
-    <div class="features-grid fade-up" style="transition-delay:0.1s">
-      <div class="feature-card featured">
-        <div class="feature-icon">◈</div>
-        <h3>Built by Galta<br />Direct from Developer</h3>
-        <p>No third-party agents. No commission markups. You speak directly with the team that built this property — and we stand behind every detail.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⬡</div>
-        <h3>Penthouse Level</h3>
-        <p>Top-floor position in a 4-story building, offering maximum privacy, elevated views, and premium finishes throughout.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⬡</div>
-        <h3>2 Garage Spaces</h3>
-        <p>Dedicated covered parking for two vehicles — a premium in Cabo San Lucas' core residential area.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⬡</div>
-        <h3>Ocean &amp; City Views</h3>
-        <p>Unobstructed panoramic views of Cabo San Lucas Bay and the cityscape — from your private terrace.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⬡</div>
-        <h3>Municipal Infrastructure</h3>
-        <p>Connected to Cabo's municipal water and sewage system — no private systems, no hidden maintenance costs.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⬡</div>
-        <h3>Zero Construction Risk</h3>
-        <p>100% complete and ready for delivery today. No waiting, no cost overruns, no delays — we build what we sell.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       CONSTRUCTION PROGRESS
-  ============================================================ -->
-  <section id="progress">
-    <div class="progress-header fade-up">
-      <div>
-        <p class="section-label">Construction Status</p>
-        <h2>Ready for Immediate Delivery</h2>
-      </div>
-      <div class="progress-pct">
-        100%
-        <small>Complete</small>
-      </div>
-    </div>
-
-    <div class="progress-bar-wrap fade-up" style="transition-delay:0.1s">
-      <div class="progress-bar-fill" data-width="100"></div>
-    </div>
-
-    <div class="milestones fade-up" style="transition-delay:0.2s">
-      <div class="milestone done">
-        <div class="milestone-status"></div>
-        <h4>Foundation &amp; Structure</h4>
-        <p>Completed on schedule. 4-story reinforced concrete structure.</p>
-      </div>
-      <div class="milestone done">
-        <div class="milestone-status"></div>
-        <h4>Exterior &amp; Envelope</h4>
-        <p>Facade, roofing, windows, and weatherproofing complete.</p>
-      </div>
-      <div class="milestone done">
-        <div class="milestone-status"></div>
-        <h4>Interior Systems</h4>
-        <p>Electrical, plumbing, and HVAC installed and inspected.</p>
-      </div>
-      <div class="milestone done">
-        <div class="milestone-status"></div>
-        <h4>Finishes &amp; Fixtures</h4>
-        <p>Flooring, cabinetry, and all finishes installed.</p>
-      </div>
-      <div class="milestone active">
-        <div class="milestone-status"></div>
-        <h4>Available Now</h4>
-        <p>Unit is finished, certified, and ready for ownership transfer.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       AMENITIES
-  ============================================================ -->
-  <section id="amenities">
-    <p class="section-label fade-up">Community Amenities</p>
-    <div class="amenities-grid fade-up" style="transition-delay:0.1s">
-      <div class="amenity-item">
-        <span class="amenity-icon">🏊</span>
-        <h4>Rooftop Pool</h4>
-      </div>
-      <div class="amenity-item">
-        <span class="amenity-icon">🏋️</span>
-        <h4>Fitness Center</h4>
-      </div>
-      <div class="amenity-item">
-        <span class="amenity-icon">🛗</span>
-        <h4>Elevator Access</h4>
-      </div>
-      <div class="amenity-item">
-        <span class="amenity-icon">🔒</span>
-        <h4>Gated Community</h4>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       LOCATION
-  ============================================================ -->
-  <section id="location">
-    <div class="fade-up">
-      <p class="section-label">Location</p>
-      <h2>In the <em>Heart</em> of Cabo San Lucas</h2>
-      <p class="loc-intro">
-        Adjacent to the prestigious Pedregal de Cabo San Lucas community, Palma Blanca sits minutes from the marina, downtown, and Cabo's best dining, beaches, and nightlife — with none of the resort-area congestion.
-      </p>
-
-      <div class="distances">
-        <div class="distance-row">
-          <span class="place">Cabo San Lucas Marina</span>
-          <span class="dist">~5 min walk</span>
-        </div>
-        <div class="distance-row">
-          <span class="place">Downtown Cabo</span>
-          <span class="dist">~3 min walk</span>
-        </div>
-        <div class="distance-row">
-          <span class="place">Playa El Médano</span>
-          <span class="dist">~8 min walk</span>
-        </div>
-        <div class="distance-row">
-          <span class="place">Pedregal Community</span>
-          <span class="dist">Adjacent</span>
-        </div>
-        <div class="distance-row">
-          <span class="place">Los Cabos Airport (SJD)</span>
-          <span class="dist">~40 min drive</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="map-wrap fade-up" style="transition-delay:0.15s">
-      <!--
-        Coordinates for Palma Blanca, Cabo San Lucas
-        (Saddles/Sunset Bch Rd area, next to Pedregal)
-      -->
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.0!2d-109.9167!3d22.8903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86af4b26e3d685a1%3A0x3b8a6c4c97d2d7c3!2sPalma+Blanca%2C+Cabo+San+Lucas!5e0!3m2!1sen!2smx!4v1710000000000"
-        allowfullscreen
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Palma Blanca location map"
-      ></iframe>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       PRICE + CONTACT FORM
-  ============================================================ -->
-  <section id="contact">
-    <div class="price-col fade-up">
-      <p class="section-label">Investment Summary</p>
-      <div class="price-display">$499,000</div>
-      <p class="price-note">USD · Direct from Developer</p>
-
-      <div class="invest-highlights">
-        <div class="invest-row">
-          <span class="icon">◈</span>
-          <div>
-            <p>Penthouse-level unit</p>
-            <span>Top floor of a 4-story boutique building. No shared overhead.</span>
-          </div>
-        </div>
-        <div class="invest-row">
-          <span class="icon">◈</span>
-          <div>
-            <p>One of only two 3BR units in the project</p>
-            <span>Extreme scarcity in a 15-unit community near completion.</span>
-          </div>
-        </div>
-        <div class="invest-row">
-          <span class="icon">◈</span>
-          <div>
-            <p>Immediate occupancy or rental income</p>
-            <span>100% complete. No construction timeline exposure.</span>
-          </div>
-        </div>
-        <div class="invest-row">
-          <span class="icon">◈</span>
-          <div>
-            <p>Direct developer pricing</p>
-            <span>No agent commissions baked in. What you see is what you pay.</span>
-          </div>
-        </div>
-        <div class="invest-row">
-          <span class="icon">◈</span>
-          <div>
-            <p>Cabo San Lucas Bay views</p>
-            <span>Panoramic ocean and city views from the penthouse terrace.</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-col fade-up" style="transition-delay:0.15s">
-      <p class="form-headline">Request a Private Briefing</p>
-      <p class="form-sub">Speak directly with the Galta development team. We respond within 24 hours.</p>
-
-      <!--
-        FORMSPREE: To activate, replace ACTION_URL with your Formspree endpoint.
-        Example: action="https://formspree.io/f/YOUR_FORM_ID"
-        Then remove the onsubmit handler and the preventDefault in the JS below.
-
-        ZAPIER / MAKE: Replace ACTION_URL with your webhook URL.
-        Method: POST, Content-Type: application/json (handled by JS below).
-      -->
-      <form
-        id="briefing-form"
-        action="https://formspree.io/f/YOUR_FORM_ID"
-        method="POST"
-        onsubmit="handleFormSubmit(event)"
-      >
-        <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Your name" required />
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="you@email.com" required />
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone / WhatsApp</label>
-            <input type="tel" id="phone" name="phone" placeholder="+1 555 000 0000" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="message">Message (optional)</label>
-          <textarea id="message" name="message" placeholder="Tell us about your timeline or any questions…"></textarea>
-        </div>
-
-        <!-- Hidden fields for context -->
-        <input type="hidden" name="property" value="Palma Blanca Penthouse #134" />
-        <input type="hidden" name="source" value="Landing Page – META Ads" />
-
-        <button type="submit" class="form-submit" id="submit-btn">
-          Request Private Briefing
-        </button>
-
-        <p class="form-privacy">Your information is kept strictly confidential.</p>
-      </form>
-
-      <div id="form-success" style="display:none; text-align:center; padding:40px 0;">
-        <p style="font-family:var(--font-serif);font-size:22px;color:var(--navy);margin-bottom:10px;">Thank you.</p>
-        <p style="font-size:13px;color:var(--text-muted);">A member of the Galta team will be in touch within 24 hours.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       FOOTER
-  ============================================================ -->
-  <footer id="footer">
-    <div class="footer-logo">
-      <img
-        src="https://images.squarespace-cdn.com/content/v1/62b34fbe5e27264c1df7b23e/1b24a9d8-fd62-4e5b-9266-5af73b17f4e5/Galta-RealEstate-Logo-Horizontal-White.png"
-        alt="Galta Real Estate"
-        onerror="this.src='images/logo-light.png'"
-      />
-    </div>
-
-    <div class="footer-contact">
-      <a href="mailto:info@galtarealestate.com">info@galtarealestate.com</a>
-      <a href="https://galtarealestate.com" target="_blank" rel="noopener">galtarealestate.com</a>
-    </div>
-
-    <div class="footer-legal">
-      © 2026 Galta Real Estate.<br />
-      All rights reserved.
-    </div>
-  </footer>
-
-  <!-- ============================================================
-       WHATSAPP FLOAT BUTTON
-       Replace +52XXXXXXXXXX with Galta's actual WhatsApp number
-  ============================================================ -->
-  <a
-    id="wa-float"
-    href="https://wa.me/52XXXXXXXXXX?text=Hi%2C%20I%27m%20interested%20in%20Palma%20Blanca%20Penthouse%20%23134"
-    target="_blank"
-    rel="noopener"
-    aria-label="Chat on WhatsApp"
-    title="Chat with Galta on WhatsApp"
-  >
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
+<!-- TOPBAR -->
+<header id="topbar">
+  <a href="#" class="logo">
+    <img src="https://images.squarespace-cdn.com/content/v1/62b34fbe5e27264c1df7b23e/1b24a9d8-fd62-4e5b-9266-5af73b17f4e5/Galta-RealEstate-Logo-Horizontal-White.png" alt="Galta Real Estate" onerror="this.src='images/logo-light.png'" />
   </a>
+  <a href="#contact" class="nav-cta">Request a Private Briefing</a>
+</header>
 
-  <!-- ============================================================
-       LIGHTBOX
-  ============================================================ -->
-  <div id="lightbox">
-    <div class="lb-close" id="lb-close">✕</div>
-    <div class="lb-prev" id="lb-prev">‹</div>
-    <img id="lb-img" src="" alt="Gallery image" />
-    <div class="lb-next" id="lb-next">›</div>
+<!-- STICKY BOTTOM BAR (appears after hero) -->
+<div id="sticky-bar">
+  <div class="sb-left">
+    <span class="sb-price">$499,000</span>
+    <span class="sb-detail">USD · Palma Blanca Penthouse #134 · 3 Bed · 3 Bath · 2,502 sq ft</span>
+  </div>
+  <a href="#contact" class="sb-btn">Request a Briefing</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span>Cabo San Lucas, Mexico</span>
+      <div class="sep"></div>
+      <span class="built">Built by Galta</span>
+    </div>
+    <h1>Palma Blanca<br /><em>Penthouse #134</em></h1>
+    <div class="hero-specs">
+      <div class="h-spec"><span class="val">3</span><span class="lbl">Bedrooms</span></div>
+      <div class="h-spec"><span class="val">3</span><span class="lbl">Bathrooms</span></div>
+      <div class="h-spec"><span class="val">2,502</span><span class="lbl">Sq Ft</span></div>
+      <div class="h-spec"><span class="val">$499K</span><span class="lbl">USD · Direct from Developer</span></div>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <div class="line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div id="trust-bar">
+  <div class="trust-item"><span class="ti">✓</span><span>100% Complete</span></div>
+  <div class="trust-item"><span class="ti">◈</span><span>Direct from Developer</span></div>
+  <div class="trust-item"><span class="ti">◈</span><span>We Build What We Sell</span></div>
+  <div class="trust-item"><span class="ti">◈</span><span>Zero Brokerage Fees</span></div>
+  <div class="trust-item"><span class="ti">◈</span><span>Ready for Delivery</span></div>
+</div>
+
+<!-- INTRO -->
+<section id="intro">
+  <div class="fade-up">
+    <p class="section-label">The Opportunity</p>
+    <h2>Not a listing.<br /><em>Our own build.</em></h2>
+    <p>Palma Blanca is a boutique, 15-unit condominium in the heart of Cabo San Lucas — next to Pedregal, steps from downtown and the marina, with panoramic views of the Bay. We don't represent other people's inventory. We built this, and we sell it directly.</p>
+    <p>Penthouse #134 is one of only two 3-bedroom units in the project. 100% complete, ready for delivery now — no construction timeline exposure, no surprises.</p>
+    <a href="#contact" class="intro-cta">Schedule a Private Walkthrough <span class="arr">→</span></a>
+  </div>
+  <div class="stat-grid fade-up" style="transition-delay:.15s">
+    <div class="stat-cell"><span class="num">100%</span><span class="slbl">Construction Complete</span></div>
+    <div class="stat-cell"><span class="num">Now</span><span class="slbl">Ready for Delivery</span></div>
+    <div class="stat-cell"><span class="num">15</span><span class="slbl">Total Units in Enclave</span></div>
+    <div class="stat-cell"><span class="num">1 of 2</span><span class="slbl">3BR Penthouse Units</span></div>
+  </div>
+</section>
+
+<!-- GALLERY — interior-first layout -->
+<section id="gallery">
+  <p class="section-label fade-up">Interior &amp; Views</p>
+
+  <!--
+    IMAGE ASSIGNMENT GUIDE
+    ─────────────────────────────────────────
+    hero.jpg      → Hero background (full bleed, exterior or terrace)
+    living.jpg    → Main gallery image (largest slot — living room)
+    bedroom-1.jpg → Top-right upper (master bedroom)
+    balcony.jpg   → Top-right lower (terrace / private balcony)
+    kitchen.jpg   → Row 2 left (kitchen)
+    view.jpg      → Row 2 center (bay / ocean view)
+    bathroom.jpg  → Row 2 right (master bathroom)
+
+    Lightbox-only (not shown in grid):
+    building.jpg  → Building exterior / facade
+    bedroom-2.jpg → Second bedroom
+    rooftop-pool.jpg → Rooftop pool
+    lobby.jpg     → Lobby / elevator
+    ─────────────────────────────────────────
+  -->
+
+  <!-- Row 1: main left + stacked right -->
+  <div class="gal-row1 fade-up" style="transition-delay:.1s">
+    <div class="gi" data-full="images/living.jpg" data-idx="0">
+      <img src="images/living.jpg" alt="Living room" loading="lazy" />
+      <span class="glbl">Living Room</span>
+    </div>
+    <div class="gal-right">
+      <div class="gi" data-full="images/bedroom-1.jpg" data-idx="1">
+        <img src="images/bedroom-1.jpg" alt="Master bedroom" loading="lazy" />
+        <span class="glbl">Master Bedroom</span>
+      </div>
+      <div class="gi" data-full="images/balcony.jpg" data-idx="2">
+        <img src="images/balcony.jpg" alt="Private terrace" loading="lazy" />
+        <span class="glbl">Private Terrace</span>
+      </div>
+    </div>
   </div>
 
-  <!-- ============================================================
-       JAVASCRIPT
-  ============================================================ -->
-  <script>
-    // ----- Hero image load animation -----
-    window.addEventListener('load', () => {
-      document.getElementById('hero').classList.add('loaded');
-    });
+  <!-- Row 2: three equal -->
+  <div class="gal-row2 fade-up" style="transition-delay:.18s">
+    <div class="gi" data-full="images/kitchen.jpg" data-idx="3">
+      <img src="images/kitchen.jpg" alt="Kitchen" loading="lazy" />
+      <span class="glbl">Kitchen</span>
+    </div>
+    <div class="gi" data-full="images/view.jpg" data-idx="4">
+      <img src="images/view.jpg" alt="Bay view" loading="lazy" />
+      <span class="glbl">Bay View</span>
+    </div>
+    <div class="gi" data-full="images/bathroom.jpg" data-idx="5">
+      <img src="images/bathroom.jpg" alt="Master bathroom" loading="lazy" />
+      <span class="glbl">Master Bathroom</span>
+    </div>
+  </div>
 
-    // ----- IntersectionObserver: fade-up -----
-    const fadeEls = document.querySelectorAll('.fade-up');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    fadeEls.forEach(el => observer.observe(el));
+  <!-- Hidden images — accessible via lightbox only -->
+  <div class="gal-hidden">
+    <span data-full="images/building.jpg" data-idx="6"></span>
+    <span data-full="images/bedroom-2.jpg" data-idx="7"></span>
+    <span data-full="images/rooftop-pool.jpg" data-idx="8"></span>
+    <span data-full="images/lobby.jpg" data-idx="9"></span>
+  </div>
 
-    // ----- Progress bar animate on scroll -----
-    const bar = document.querySelector('.progress-bar-fill');
-    const barObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        bar.style.width = bar.dataset.width + '%';
-        barObserver.disconnect();
-      }
-    }, { threshold: 0.3 });
-    if (bar) barObserver.observe(bar);
+  <div class="gal-footer" id="see-all">
+    <span>View all 10 photos</span>
+    <span style="color:var(--sky);font-size:16px;">→</span>
+  </div>
+</section>
 
-    // ----- Gallery lightbox -----
-    const galleryImgs = Array.from(document.querySelectorAll('.gallery-item img')).map(i => i.src);
-    let currentLb = 0;
+<!-- FEATURES -->
+<section id="features">
+  <p class="section-label fade-up">Property Features</p>
+  <div class="feat-grid fade-up" style="transition-delay:.1s">
+    <div class="fc star">
+      <div class="fc-icon">◈</div>
+      <h3>Built by Galta<br />Direct from Developer</h3>
+      <p>No third-party agents. No commission markups. You speak directly with the team that built this property — and we stand behind every detail.</p>
+    </div>
+    <div class="fc">
+      <div class="fc-icon">⬡</div>
+      <h3>Penthouse Level<br />4-Story Building</h3>
+      <p>Top-floor position offering maximum privacy, no shared overhead, and premium finishes throughout every room.</p>
+    </div>
+    <div class="fc">
+      <div class="fc-icon">⬡</div>
+      <h3>2 Garage Spaces<br />Included</h3>
+      <p>Dedicated covered parking for two vehicles — a premium in Cabo San Lucas' most walkable residential address.</p>
+    </div>
+    <div class="fc">
+      <div class="fc-icon">⬡</div>
+      <h3>Ocean &amp; City<br />Panoramic Views</h3>
+      <p>Unobstructed views of Cabo San Lucas Bay and the cityscape from your private penthouse terrace.</p>
+    </div>
+    <div class="fc">
+      <div class="fc-icon">⬡</div>
+      <h3>Municipal<br />Infrastructure</h3>
+      <p>Connected to Cabo's municipal water and sewage system — no private systems, no hidden maintenance surprises.</p>
+    </div>
+    <div class="fc">
+      <div class="fc-icon">⬡</div>
+      <h3>Zero<br />Construction Risk</h3>
+      <p>100% complete, certified, and ready for delivery today. No waiting, no overruns — we build what we sell.</p>
+    </div>
+  </div>
+</section>
 
-    document.querySelectorAll('.gallery-item').forEach((item, i) => {
-      item.addEventListener('click', () => {
-        currentLb = i;
-        openLightbox(i);
-      });
-    });
+<!-- PROGRESS -->
+<section id="progress">
+  <div class="prog-head fade-up">
+    <div>
+      <p class="section-label">Construction Status</p>
+      <h2>Ready for Immediate Delivery</h2>
+    </div>
+    <div class="prog-pct">100%<small>Complete</small></div>
+  </div>
+  <div class="prog-track fade-up" style="transition-delay:.1s">
+    <div class="prog-fill" data-w="100"></div>
+  </div>
+  <div class="milestones fade-up" style="transition-delay:.2s">
+    <div class="ms done"><div class="ms-dot"></div><h4>Foundation &amp; Structure</h4><p>4-story reinforced concrete structure, completed on schedule.</p></div>
+    <div class="ms done"><div class="ms-dot"></div><h4>Exterior &amp; Envelope</h4><p>Facade, roofing, windows, and weatherproofing complete.</p></div>
+    <div class="ms done"><div class="ms-dot"></div><h4>Interior Systems</h4><p>Electrical, plumbing, and HVAC installed and inspected.</p></div>
+    <div class="ms done"><div class="ms-dot"></div><h4>Finishes &amp; Fixtures</h4><p>Flooring, cabinetry, and all finish work complete.</p></div>
+    <div class="ms now"><div class="ms-dot"></div><h4>Available Now</h4><p>Unit certified and ready for ownership transfer.</p></div>
+  </div>
+</section>
 
-    function openLightbox(i) {
-      document.getElementById('lb-img').src = galleryImgs[i];
-      document.getElementById('lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+<!-- AMENITIES -->
+<section id="amenities">
+  <p class="section-label fade-up">Community Amenities</p>
+  <div class="am-grid fade-up" style="transition-delay:.1s">
+    <div class="am"><span class="am-icon">🏊</span><h4>Rooftop Pool</h4></div>
+    <div class="am"><span class="am-icon">🏋️</span><h4>Fitness Center</h4></div>
+    <div class="am"><span class="am-icon">🛗</span><h4>Elevator Access</h4></div>
+    <div class="am"><span class="am-icon">🔒</span><h4>Gated Community</h4></div>
+  </div>
+</section>
 
-    document.getElementById('lb-close').addEventListener('click', closeLightbox);
-    document.getElementById('lightbox').addEventListener('click', (e) => {
-      if (e.target.id === 'lightbox') closeLightbox();
-    });
+<!-- LOCATION -->
+<section id="location">
+  <div class="fade-up">
+    <p class="section-label">Location</p>
+    <h2>In the <em>Heart</em><br />of Cabo San Lucas</h2>
+    <p class="loc-p">Adjacent to the prestigious Pedregal de Cabo San Lucas community, Palma Blanca sits minutes from the marina, downtown, and Cabo's best restaurants and beaches — with none of the resort-area congestion.</p>
+    <div class="dists">
+      <div class="dr"><span class="pl">Cabo San Lucas Marina</span><span class="dt">~5 min walk</span></div>
+      <div class="dr"><span class="pl">Downtown Cabo</span><span class="dt">~3 min walk</span></div>
+      <div class="dr"><span class="pl">Playa El Médano</span><span class="dt">~8 min walk</span></div>
+      <div class="dr"><span class="pl">Pedregal Community</span><span class="dt">Adjacent</span></div>
+      <div class="dr"><span class="pl">Los Cabos Airport (SJD)</span><span class="dt">~40 min drive</span></div>
+    </div>
+  </div>
+  <div class="map-wrap fade-up" style="transition-delay:.15s">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.5!2d-109.9167!3d22.8903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86af4b26e3d685a1%3A0x3b8a6c4c97d2d7c3!2sPalma+Blanca%2C+Cabo+San+Lucas!5e0!3m2!1sen!2smx!4v1710000000000"
+      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Palma Blanca location"
+    ></iframe>
+  </div>
+</section>
 
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
-    }
+<!-- CONTACT / FORM — the conversion zone -->
+<section id="contact">
+  <div class="price-col fade-up">
+    <p class="section-label">Investment Summary</p>
+    <div class="price-num">$499,000</div>
+    <p class="price-sub">USD · Direct from Developer · No Brokerage Fees</p>
+    <div class="inv-list">
+      <div class="inv-row"><span class="ico">◈</span><div><strong>Penthouse level, 4-story building</strong><em>Top floor. No shared overhead. Maximum privacy.</em></div></div>
+      <div class="inv-row"><span class="ico">◈</span><div><strong>1 of only 2 three-bedroom units</strong><em>Extreme scarcity in a 15-unit boutique community.</em></div></div>
+      <div class="inv-row"><span class="ico">◈</span><div><strong>Immediate occupancy or rental income</strong><em>100% complete. Zero construction timeline exposure.</em></div></div>
+      <div class="inv-row"><span class="ico">◈</span><div><strong>Direct developer pricing</strong><em>No agent commissions built in. Transparent from day one.</em></div></div>
+      <div class="inv-row"><span class="ico">◈</span><div><strong>Panoramic ocean and city views</strong><em>Cabo San Lucas Bay and cityscape from the penthouse terrace.</em></div></div>
+    </div>
+  </div>
 
-    document.getElementById('lb-prev').addEventListener('click', () => {
-      currentLb = (currentLb - 1 + galleryImgs.length) % galleryImgs.length;
-      document.getElementById('lb-img').src = galleryImgs[currentLb];
-    });
-    document.getElementById('lb-next').addEventListener('click', () => {
-      currentLb = (currentLb + 1) % galleryImgs.length;
-      document.getElementById('lb-img').src = galleryImgs[currentLb];
-    });
+  <div class="form-card fade-up" style="transition-delay:.15s">
+    <div class="form-nudge">
+      <p>This is the last penthouse available in Palma Blanca. We respond to every inquiry within 24 hours.</p>
+    </div>
 
-    document.addEventListener('keydown', (e) => {
-      if (!document.getElementById('lightbox').classList.contains('open')) return;
-      if (e.key === 'ArrowLeft') document.getElementById('lb-prev').click();
-      if (e.key === 'ArrowRight') document.getElementById('lb-next').click();
-      if (e.key === 'Escape') closeLightbox();
-    });
+    <p class="form-head">Request a Private Briefing</p>
+    <p class="form-sub">Speak directly with the Galta development team — the people who built this property.</p>
 
-    // ----- Form handling -----
-    function handleFormSubmit(e) {
-      /*
-        FORMSPREE ACTIVE MODE:
-        Remove the e.preventDefault() line and the fetch block below
-        to let Formspree handle the native POST. OR keep this JS
-        handler to get a smoother success experience without redirect.
+    <!--
+      ══ FORMSPREE (recommended) ═══════════════════════════════════
+      1. Go to formspree.io → create free form
+      2. Replace YOUR_FORM_ID with your actual ID in the action attr
+      3. Keep the onsubmit handler for smooth success message (no redirect)
+         OR remove it + the preventDefault to use Formspree's native flow
 
-        ZAPIER / MAKE:
-        Replace the action URL in the <form> tag with your webhook URL,
-        and keep this handler as-is. The fetch will POST JSON to your webhook.
-      */
-      e.preventDefault();
+      ══ ZAPIER / MAKE ══════════════════════════════════════════════
+      Replace the action URL with your webhook endpoint.
+      The fetch below will POST FormData to any URL you provide.
+    -->
+    <form id="briefing-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleSubmit(event)">
+      <div class="fg">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name" />
+      </div>
+      <div class="fg-row">
+        <div class="fg">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" required autocomplete="email" />
+        </div>
+        <div class="fg">
+          <label for="phone">Phone / WhatsApp</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 555 000 0000" autocomplete="tel" />
+        </div>
+      </div>
+      <div class="fg">
+        <label for="message">Questions or timeline</label>
+        <textarea id="message" name="message" placeholder="Tell us about your timeline, financing questions, or anything else…"></textarea>
+      </div>
+      <input type="hidden" name="property" value="Palma Blanca Penthouse #134" />
+      <input type="hidden" name="price" value="$499,000 USD" />
+      <input type="hidden" name="source" value="Landing Page — META Ads" />
+      <input type="hidden" name="_subject" value="New Inquiry — Palma Blanca Penthouse #134" />
+      <button type="submit" class="form-btn" id="submit-btn">Request Private Briefing</button>
+      <p class="form-priv">Your information is kept strictly confidential.</p>
+    </form>
 
-      const form = document.getElementById('briefing-form');
-      const btn  = document.getElementById('submit-btn');
-      const data = new FormData(form);
+    <div id="form-success">
+      <p class="fs-h">Thank you.</p>
+      <p class="fs-p">A member of the Galta team will reach out within 24 hours.<br />In the meantime, feel free to message us directly.</p>
+      <!-- Replace 52XXXXXXXXXX with Galta's WhatsApp -->
+      <a href="https://wa.me/52XXXXXXXXXX?text=Hi%2C%20I%27d%20like%20to%20learn%20more%20about%20Palma%20Blanca%20Penthouse%20%23134" target="_blank" rel="noopener" class="fs-wa">Message us on WhatsApp</a>
+    </div>
+  </div>
+</section>
 
-      btn.textContent = 'Sending…';
-      btn.disabled = true;
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="fl">
+    <img src="https://images.squarespace-cdn.com/content/v1/62b34fbe5e27264c1df7b23e/1b24a9d8-fd62-4e5b-9266-5af73b17f4e5/Galta-RealEstate-Logo-Horizontal-White.png" alt="Galta Real Estate" onerror="this.src='images/logo-light.png'" />
+  </div>
+  <div class="fc2">
+    <a href="mailto:info@galtarealestate.com">info@galtarealestate.com</a>
+    <a href="https://galtarealestate.com" target="_blank" rel="noopener">galtarealestate.com</a>
+  </div>
+  <div class="flg">© 2026 Galta Real Estate.<br />All rights reserved.</div>
+</footer>
 
-      fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
+<!-- WHATSAPP — replace 52XXXXXXXXXX -->
+<a id="wa-float" href="https://wa.me/52XXXXXXXXXX?text=Hi%2C%20I%27m%20interested%20in%20Palma%20Blanca%20Penthouse%20%23134" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <div class="lb-x" id="lb-x">✕</div>
+  <div class="lb-btn" id="lb-p">‹</div>
+  <img id="lb-img" src="" alt="Property photo" />
+  <div class="lb-btn" id="lb-n">›</div>
+  <div id="lb-c"></div>
+</div>
+
+<script>
+  // Hero entrance
+  window.addEventListener('load', () => document.getElementById('hero').classList.add('loaded'));
+
+  // Fade-up observer
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // Progress bar
+  const pf = document.querySelector('.prog-fill');
+  if (pf) {
+    const pio = new IntersectionObserver(e => { if (e[0].isIntersecting) { pf.style.width = pf.dataset.w + '%'; pio.disconnect(); } }, { threshold: 0.4 });
+    pio.observe(pf);
+  }
+
+  // Sticky bar after hero
+  const heroEl = document.getElementById('hero');
+  const stickyEl = document.getElementById('sticky-bar');
+  new IntersectionObserver(e => stickyEl.classList.toggle('on', !e[0].isIntersecting), { threshold: 0 }).observe(heroEl);
+
+  // Lightbox setup
+  // Build indexed image list from visible + hidden gallery items
+  const lbImgs = {};
+  document.querySelectorAll('.gi[data-full], .gal-hidden [data-full]').forEach(el => {
+    lbImgs[parseInt(el.dataset.idx)] = el.dataset.full;
+  });
+  const lbArr = Object.keys(lbImgs).sort((a,b)=>a-b).map(k=>lbImgs[k]);
+  let lbCur = 0;
+
+  function lbOpen(i) {
+    lbCur = Math.min(i, lbArr.length - 1);
+    lbUpdate();
+    document.getElementById('lb').classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function lbClose() {
+    document.getElementById('lb').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+  function lbUpdate() {
+    document.getElementById('lb-img').src = lbArr[lbCur];
+    document.getElementById('lb-c').textContent = (lbCur + 1) + ' / ' + lbArr.length;
+  }
+
+  document.querySelectorAll('.gi[data-idx]').forEach(el => {
+    el.addEventListener('click', () => lbOpen(parseInt(el.dataset.idx)));
+  });
+  document.getElementById('see-all').addEventListener('click', () => lbOpen(0));
+  document.getElementById('lb-x').addEventListener('click', lbClose);
+  document.getElementById('lb').addEventListener('click', e => { if (e.target.id === 'lb') lbClose(); });
+  document.getElementById('lb-p').addEventListener('click', () => { lbCur = (lbCur - 1 + lbArr.length) % lbArr.length; lbUpdate(); });
+  document.getElementById('lb-n').addEventListener('click', () => { lbCur = (lbCur + 1) % lbArr.length; lbUpdate(); });
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lb').classList.contains('on')) return;
+    if (e.key === 'Escape') lbClose();
+    if (e.key === 'ArrowLeft') document.getElementById('lb-p').click();
+    if (e.key === 'ArrowRight') document.getElementById('lb-n').click();
+  });
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('briefing-form');
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+      .then(r => {
+        if (r.ok) { form.style.display = 'none'; document.getElementById('form-success').style.display = 'block'; }
+        else { btn.textContent = 'Something went wrong — try again'; btn.disabled = false; }
       })
-      .then(res => {
-        if (res.ok) {
-          form.style.display = 'none';
-          document.getElementById('form-success').style.display = 'block';
-        } else {
-          btn.textContent = 'Error — please try again';
-          btn.disabled = false;
-        }
-      })
-      .catch(() => {
-        btn.textContent = 'Error — please try again';
-        btn.disabled = false;
-      });
-    }
-  </script>
-
+      .catch(() => { btn.textContent = 'Connection error — try again'; btn.disabled = false; });
+  }
+</script>
 </body>
 </html>
